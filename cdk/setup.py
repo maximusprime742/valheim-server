@@ -9,11 +9,11 @@ setuptools.setup(
     name="cdk",
     version="0.0.1",
 
-    description="An empty CDK Python app",
+    description="Valheim Server",
     long_description=long_description,
     long_description_content_type="text/markdown",
 
-    author="author",
+    author="maxge",
 
     package_dir={"": "cdk"},
     packages=setuptools.find_packages(where="cdk"),
