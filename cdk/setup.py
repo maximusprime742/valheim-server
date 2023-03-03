@@ -26,7 +26,7 @@ setuptools.setup(
         "aws-cdk.aws_s3==1.92.0",
         "aws_cdk.aws_s3_deployment==1.92.0",
         "aws-cdk.aws_apigateway==1.92.0",
-        "cdk-valheim==0.0.16",
+        "cdk-valheim==0.0.24",
     ],
 
     python_requires=">=3.6",
