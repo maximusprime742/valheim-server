@@ -1,3 +1,9 @@
 .env
 .vscode
 .gitconfig
+.venv
+node_modules
+layers
+cdk.out
+package.json
+package-lock.json
