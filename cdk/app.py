@@ -18,9 +18,7 @@ aws_account = os.environ.get("AWS_ACCOUNT_ID", "")
 
 app = cdk.App()
 CdkStack(
-    app,
-    "valheim-server-stack",
-    env={"region": aws_region, "account": aws_account}
+    app, "valheim-server-stack", env={"region": aws_region, "account": aws_account}
 )
 
 app.synth()
