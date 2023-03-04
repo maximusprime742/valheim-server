@@ -22,7 +22,7 @@ cdk_deploy:
       when: always
   before_script:
     - apt-get -qq update && apt-get -y install nodejs npm
-    - npm i -g aws-cdk@1.160.0
+    - npm i -g aws-cdk@2.x
     - pip3 install -e cdk
   script:
     - cdk bootstrap --app cdk/app.py aws://$AWS_ACCOUNT_ID/$AWS_DEFAULT_REGION
