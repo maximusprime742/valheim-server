@@ -22,6 +22,7 @@ cdk_deploy:
       when: always
   before_script:
     - apt-get -qq update && apt-get -y install nodejs npm
+    - apt-get install awscli
     - npm i -g aws-cdk@1.160.0
     - pip3 install -e cdk
   script:
