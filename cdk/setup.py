@@ -15,7 +15,7 @@ setuptools.setup(
     package_dir={"": "cdk"},
     packages=setuptools.find_packages(where="cdk"),
     install_requires=[
-        "aws-cdk.core==1.925.0",
+        "aws-cdk.core==1.195.0",
         "aws-cdk.aws_applicationautoscaling==1.195.0",
         "aws-cdk.aws_datasync==1.195.0",
         "aws-cdk.aws_lambda==1.195.0",
