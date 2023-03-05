@@ -25,7 +25,5 @@ cdk_deploy:
     - npm i -g aws-cdk@1.160.0
     - pip3 install -e cdk
   script:
-    - aws cloudformation list-stacks
-    - aws cloudformation delete-stack --stack-name CDKToolkit
     - cdk bootstrap --app cdk/app.py aws://$AWS_ACCOUNT_ID/$AWS_DEFAULT_REGION
     - cdk deploy --app cdk/app.py --require-approval never
