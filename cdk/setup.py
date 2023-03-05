@@ -21,7 +21,7 @@ setuptools.setup(
         "aws-cdk.aws_lambda==1.195.0",
         "aws-cdk.aws_s3==1.195.0",
         "aws-cdk.aws_apigateway==1.195.0",
-        "cdk-valheim==0.0.28",
+        "cdk-valheim==0.0.24",
     ],
     python_requires=">=3.6",
     classifiers=[
