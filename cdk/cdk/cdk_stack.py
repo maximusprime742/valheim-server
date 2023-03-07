@@ -1,6 +1,8 @@
 import os
 
-from aws_cdk import core as cdk
+import aws_cdk as cdk
+
+from constructs import Construct
 
 # For consistency with other languages, `cdk` is the preferred import name for
 # the CDK's core module.  The following line also imports it as `core` for use
@@ -8,7 +10,6 @@ from aws_cdk import core as cdk
 # being updated to use `cdk`.  You may delete this import if you don't need it.
 
 from aws_cdk import (
-    core,
     aws_datasync as datasync,
     aws_iam as iam,
     aws_lambda as _lambda,
@@ -20,7 +21,7 @@ from cdk_valheim import ValheimWorld, ValheimWorldScalingSchedule
 
 
 class CdkStack(cdk.Stack):
-    def __init__(self, scope: cdk.Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         # The code that defines your stack goes here
@@ -29,16 +30,16 @@ class CdkStack(cdk.Stack):
             "ValheimWorld",
             cpu=2048,
             memory_limit_mib=4096,
-            schedules=[
-                ValheimWorldScalingSchedule(
-                    start=appScaling.CronOptions(hour="12", week_day="1-5"),
-                    stop=appScaling.CronOptions(hour="1", week_day="1-5"),
-                )
-            ],
+            # schedules=[
+            #     ValheimWorldScalingSchedule(
+            #         start=appScaling.CronOptions(hour="12", week_day="1-5"),
+            #         stop=appScaling.CronOptions(hour="1", week_day="1-5"),
+            #     )
+            # ],
             environment={
-                "SERVER_NAME": os.environ.get("SERVER_NAME", "CDK Valheim"),
-                "WORLD_NAME": os.environ.get("WORLD_NAME", "Amazon"),
-                "SERVER_PASS": os.environ.get("SERVER_PASS", "fargate"),
+                "SERVER_NAME": "CDK Valheim",
+                "WORLD_NAME": "Amazon",
+                "SERVER_PASS": "fargate",
                 "BACKUPS": "false",
             },
         )
@@ -66,7 +67,7 @@ class CdkStack(cdk.Stack):
             function_name="flask-app-handler",
             handler="lambda-handler.handler",
             layers=[self.flask_lambda_layer],
-            timeout=core.Duration.seconds(60),
+            timeout=cdk.Duration.seconds(60),
             environment={**self.env_vars},
         )
 
@@ -147,17 +148,14 @@ class CdkStack(cdk.Stack):
                 "securityGroupArns": [
                     # security group ARN
                     # TODO figure out how to reference this dynamically
-                    # "arn:aws:cloudformation:us-east-1:733623710918:stack/valheim-server-stack/d7895640-8301-11eb-a011-0e72707fff19"
-                    "arn:aws:ec2:us-east-1:733623710918:security-group/sg-0b8a444c9b7097e16",
-                    "arn:aws:ec2:us-east-1:733623710918:security-group/sg-003d30fb7540ee065",
-                    "arn:aws:ec2:us-east-1:733623710918:security-group/sg-b4e044c1",
+                    "arn:aws:ec2:us-east-1:022619273756:security-group/sg-082487e46af576a24",
                 ],
                 # TODO figure out how to reference this dynamically
-                "subnetArn": "arn:aws:ec2:us-east-1:733623710918:subnet/subnet-91c151da",
+                "subnetArn": "arn:aws:ec2:us-east-1:022619273756:subnet/subnet-0643a71a185c6754b",
             },
             # TODO figure out how to reference this dynamically
             # efs_filesystem_arn=self.valheim_world.file_system.arn
-            efs_filesystem_arn="arn:aws:elasticfilesystem:us-east-1:733623710918:file-system/fs-f23acb47",
+            efs_filesystem_arn="arn:aws:elasticfilesystem:us-east-1:022619273756:file-system/fs-00425887f7388f2e9",
         )
 
         # datasync task
