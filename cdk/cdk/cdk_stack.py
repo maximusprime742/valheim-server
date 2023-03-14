@@ -55,14 +55,14 @@ class CdkStack(cdk.Stack):
             "FlaskAppLambdaLayer",
             code=_lambda.AssetCode("./layers/flask"),
             compatible_runtimes=[
-                _lambda.Runtime.PYTHON_3_8,
+                _lambda.Runtime.PYTHON_3_9,
             ],
         )
 
         self.flask_app_lambda = _lambda.Function(
             self,
             "FlaskAppLambda",
-            runtime=_lambda.Runtime.PYTHON_3_8,
+            runtime=_lambda.Runtime.PYTHON_3_9,
             code=_lambda.AssetCode("./lambda/functions/interactions"),
             function_name="flask-app-handler",
             handler="lambda-handler.handler",
@@ -148,14 +148,15 @@ class CdkStack(cdk.Stack):
                 "securityGroupArns": [
                     # security group ARN
                     # TODO figure out how to reference this dynamically
+                    "arn:aws:ec2:us-east-1:022619273756:security-group/sg-043af91734863e45d",
                     "arn:aws:ec2:us-east-1:022619273756:security-group/sg-082487e46af576a24",
+                    "arn:aws:ec2:us-east-1:022619273756:security-group/sg-0b8d95326ad782695",
                 ],
                 # TODO figure out how to reference this dynamically
                 "subnetArn": "arn:aws:ec2:us-east-1:022619273756:subnet/subnet-0643a71a185c6754b",
             },
             # TODO figure out how to reference this dynamically
-            # efs_filesystem_arn=self.valheim_world.file_system.arn
-            efs_filesystem_arn="arn:aws:elasticfilesystem:us-east-1:022619273756:file-system/fs-00425887f7388f2e9",
+            efs_filesystem_arn="arn:aws:elasticfilesystem:us-east-1:022619273756:file-system/fs-0df1be70fc885585e",
         )
 
         # datasync task
